@@ -40,3 +40,20 @@ The notebook contains the full workflow, from data loading and cleaning to model
 - `test_cleaned.csv`: The preprocessed test data.
 - `best_model.joblib`: The trained XGBoost model saved using joblib.
 - `submission.csv`: The submission file in the format required by the Kaggle competition.
+
+
+**SUMMARY :** 
+
+DATA ANALYSIS KEY FINDINGS
+- Initial data inspection revealed missing values in 'Age', 'Fare', 'Cabin', and 'Embarked'.
+- Significant correlations were observed between 'Survived' and 'Sex', 'Pclass', and 'Fare'.
+- Feature engineering created new features like 'Title', 'family_size', 'AgeBand', 'FareBand', and 'Deck'.
+- Missing 'Age' values were imputed with the median age, the single missing 'Fare' value with the median fare, and missing 'Embarked' values with the mode.
+- Categorical features were one-hot encoded, and unnecessary columns were dropped, resulting in preprocessed data with a shape of (891, 31) for training and (418, 31) for testing.
+- Three models (Logistic Regression, Random Forest, XGBoost) were trained and evaluated using stratified 5-fold cross-validation.
+- XGBoost showed the best baseline performance with a mean cross-validation accuracy of approximately 0.8204.
+- Hyperparameter tuning using Grid Search on the XGBoost model improved the cross-validation accuracy to approximately 0.8350.
+- Feature importance analysis of the tuned XGBoost model identified 'Title_Mr', 'Sex_female', 'Pclass_3', 'Title_Rare', and 'Deck_nan' as the most important features.
+- The best-tuned XGBoost model was retrained on the full training dataset and used to make predictions on the test dataset.
+- A submission file ('submission.csv') was generated with 'PassengerId' and the predicted 'Survived' values.
+- Cleaned data ('train_cleaned.csv', 'test_cleaned.csv') and the trained model ('best_model.joblib') were saved.
